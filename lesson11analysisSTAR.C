@@ -1,61 +1,72 @@
-#include<TFile.h>
-#include<TH1F.h>
-#include<TCanvas.h>
-#include<TTree.h>
-#include<TF1.h>
-#include<TLegend.h>
+#include <TCanvas.h>
+#include <TF1.h>
+#include <TFile.h>
+#include <TH1F.h>
+#include <TLegend.h>
+#include <TTree.h>
+#include <cmath>
+#include <iostream>
 
 void lesson11analysisSTAR()
 {
-    // 打开ROOT文件
-    TFile *file = new TFile("star.root", "READ");
+    // 打开 ROOT 文件
+    TFile *file = TFile::Open("star.root", "READ");
+    if (!file || file->IsZombie()) {
+        std::cerr << "Error: cannot open star.root" << std::endl;
+        delete file;
+        return;
+    }
 
     // 从文件中读取树
-    TTree *tree = (TTree*)file->Get("EventTree");
+    TTree *tree = nullptr;
+    file->GetObject("EventTree", tree);
+    if (!tree) {
+        std::cerr << "Error: EventTree not found in star.root" << std::endl;
+        file->Close();
+        delete file;
+        return;
+    }
 
-    // 定义变量
-    double pt, eta, phi;
-
-    // 将变量与树的分支关联
+    // 定义变量并绑定 TTree 分支
+    double pt = 0.0;
+    double eta = 0.0;
+    double phi = 0.0;
     tree->SetBranchAddress("pt", &pt);
     tree->SetBranchAddress("eta", &eta);
     tree->SetBranchAddress("phi", &phi);
 
-    // 创建一个画布
-    TCanvas *c11 = new TCanvas("c11", "Read Tree Data");
+    TCanvas *c11 = new TCanvas("c11", "STAR pT Analysis", 800, 600);
+    TH1F *hpt = new TH1F(
+        "hpt",
+        "p_{T} Distribution from STAR Tree; p_{T} (GeV/c); Counts",
+        100, 0.2, 5.0
+    );
 
-    // 创建一个直方图来存储pt数据
-    TH1F *hpt = new TH1F("hpt", "pT Distribution from STAR Tree; pT(Gev/c); N(pT)", 100, 0.2, 5);
-   
-    // 遍历树中的所有条目并填充直方图
-    for (int i = 0; i < tree->GetEntries(); i++) 
-    {
+    // 遍历 TTree，并进行基本运动学选择
+    const Long64_t nEntries = tree->GetEntries();
+    for (Long64_t i = 0; i < nEntries; ++i) {
         tree->GetEntry(i);
 
-        if (pt < 0.2) continue; // Skip negative pt values
-        if (abs(eta) > 1.0) continue; // Skip events with |eta| > 1.0
+        if (pt < 0.2) continue;
+        if (std::abs(eta) > 1.0) continue;
 
-
-        hpt->Fill(pt); // Fill the histogram with the pt value from the tree
-
+        hpt->Fill(pt);
     }
 
-    // 创建拟合函数
-    TF1 *fit = new TF1("fit", "[0]*exp(-x/[1])", 0.2, 5); // Define an exponential function
-    fit->SetParameters(5000, 0.8); // Set initial parameters for the fit
-    hpt->Fit(fit, "R"); // Fit the histogram with the function
+    // 指数函数拟合：A * exp(-pT / T)
+    TF1 *fit = new TF1("fit", "[0]*exp(-x/[1])", 0.2, 5.0);
+    fit->SetParameters(5000, 0.8);
+    hpt->Fit(fit, "R");
 
-    TLegend *legend = new TLegend(0.6, 0.7, 0.9, 0.9);
-    legend->AddEntry(hpt, "pT spectrum", "lp");
-    legend->AddEntry(fit, "Exponential Fit", "l");
+    TLegend *legend = new TLegend(0.60, 0.70, 0.88, 0.88);
+    legend->AddEntry(hpt, "p_{T} spectrum", "l");
+    legend->AddEntry(fit, "Exponential fit", "l");
 
-    // 绘制直方图
     hpt->Draw();
-    // fit->SetLineColor(kRed);
-    // fit->SetLineWidth(2);
-    // fit->Draw("SAME");
+    fit->Draw("SAME");
     legend->Draw();
     c11->SaveAs("STAR_pT_Distribution.pdf");
 
+    file->Close();
+    delete file;
 }
-    
