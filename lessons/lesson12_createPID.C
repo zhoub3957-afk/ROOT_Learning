@@ -6,7 +6,7 @@
 void lesson12_createPID()
 {
     // 创建一个ROOT文件
-    TFile *file = new TFile("PID_simulation.root", "RECREATE");
+    TFile *file = new TFile("data/PID_simulation.root", "RECREATE");
 
     // 创建一个TTree对象
     TTree *tree = new TTree("ParticleTree", "Simulated Particle Identification Data");

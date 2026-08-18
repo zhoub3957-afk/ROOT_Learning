@@ -43,6 +43,6 @@ void lesson02()
 
     h2->Draw();
 
-    c2->SaveAs("lesson02.png");
+    c2->SaveAs("plots/lesson02.png");
 
 }

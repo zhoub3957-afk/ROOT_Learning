@@ -5,7 +5,7 @@
 void lesson09_createFile()
 {
     // 创建一个ROOT文件
-    TFile *file = new TFile("test.root", "RECREATE"); //recreate
+    TFile *file = new TFile("data/test.root", "RECREATE"); //recreate
 
     // 创建一个直方图
     TH1F *hpt = new TH1F("hpt", "Particle pT Distribution", 100, 0, 10);

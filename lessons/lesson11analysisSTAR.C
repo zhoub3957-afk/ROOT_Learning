@@ -10,9 +10,9 @@
 void lesson11analysisSTAR()
 {
     // 打开 ROOT 文件
-    TFile *file = TFile::Open("star.root", "READ");
+    TFile *file = TFile::Open("data/star.root", "READ");
     if (!file || file->IsZombie()) {
-        std::cerr << "Error: cannot open star.root" << std::endl;
+        std::cerr << "Error: cannot open data/star.root" << std::endl;
         delete file;
         return;
     }
@@ -21,7 +21,7 @@ void lesson11analysisSTAR()
     TTree *tree = nullptr;
     file->GetObject("EventTree", tree);
     if (!tree) {
-        std::cerr << "Error: EventTree not found in star.root" << std::endl;
+        std::cerr << "Error: EventTree not found in data/star.root" << std::endl;
         file->Close();
         delete file;
         return;
@@ -65,8 +65,9 @@ void lesson11analysisSTAR()
     hpt->Draw();
     fit->Draw("SAME");
     legend->Draw();
-    c11->SaveAs("STAR_pT_Distribution.pdf");
+    c11->SaveAs("plots/STAR_pT_Distribution.pdf");
 
     file->Close();
     delete file;
 }
+

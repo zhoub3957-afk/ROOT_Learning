@@ -22,6 +22,6 @@ void lesson01()
 
     h1->Draw();
 
-    c1->SaveAs("lesson01.png");
+    c1->SaveAs("plots/lesson01.png");
 
 }

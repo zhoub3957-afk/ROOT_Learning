@@ -21,5 +21,5 @@ void lesson17_TGraphErrors()
     // g17->SetMarkerColor(kRed);
     g17->Draw("AP");
 
-    c17->SaveAs("lesson17_TGraphErrors.png");
+    c17->SaveAs("plots/lesson17_TGraphErrors.png");
 }

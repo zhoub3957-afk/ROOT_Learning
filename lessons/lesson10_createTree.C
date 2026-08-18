@@ -5,7 +5,7 @@
 void lesson10_createTree()
 {
     // 创建一个ROOT文件
-    TFile *file = new TFile("practicle.root", "RECREATE");
+    TFile *file = new TFile("data/practicle.root", "RECREATE");
 
     // 创建一个TTree对象
     TTree *tree = new TTree("tree", "Practice Tree");

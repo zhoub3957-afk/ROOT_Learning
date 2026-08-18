@@ -36,6 +36,6 @@ void lesson03()
     cout << "pT > 2.5 GeV/c = " << h3->Integral(25, 35) << endl;
     cout << "Bin Content (30): " << h3->GetBinContent(30) << endl;
 
-    c3->SaveAs("lesson03.png");
+    c3->SaveAs("plots/lesson03.png");
 
 }

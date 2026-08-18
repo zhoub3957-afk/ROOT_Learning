@@ -36,5 +36,5 @@ void lesson15()
     TCanvas *c15 = new TCanvas("c15", "Ratio of Histograms");
     hRatio->Draw();
 
-    c15->SaveAs("lesson15.png");
+    c15->SaveAs("plots/lesson15.png");
 }

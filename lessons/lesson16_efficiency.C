@@ -45,5 +45,5 @@ void lesson16_efficiency()
     hMeasured->Draw();
     hCorrected->Draw("SAME");
 
-    c16->SaveAs("lesson16_efficiency.png");
+    c16->SaveAs("plots/lesson16_efficiency.png");
 }

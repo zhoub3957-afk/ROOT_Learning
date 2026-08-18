@@ -37,5 +37,5 @@ void lesson08()
 
     legend->Draw();
 
-    c8->SaveAs("lesson08.pdf");
+    c8->SaveAs("plots/lesson08.pdf");
 }

@@ -21,5 +21,5 @@ void lesson05()
     // 绘制图形
     gr->Draw("AP"); // A: Axis, L: Line, P: Points
 
-    c5->SaveAs("lesson05.png");
+    c5->SaveAs("plots/lesson05.png");
 }

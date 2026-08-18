@@ -5,7 +5,7 @@
 void lesson11createSTAR()
 {
     // 创建一个ROOT文件
-    TFile *file = new TFile("star.root", "RECREATE");
+    TFile *file = new TFile("data/star.root", "RECREATE");
 
     // 创建一个TTree对象
     TTree *tree = new TTree("EventTree", "STAR simulated events");

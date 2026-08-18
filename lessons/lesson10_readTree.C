@@ -6,7 +6,7 @@
 void lesson10_readTree()
 {
     // 打开ROOT文件
-    TFile *file = new TFile("practicle.root", "READ");
+    TFile *file = new TFile("data/practicle.root", "READ");
 
     // 从文件中读取树
     TTree *tree = (TTree*)file->Get("tree");

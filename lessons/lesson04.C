@@ -27,5 +27,5 @@ void lesson04()
     data->Draw("AP"); // A: Axis, P: Points
     model->Draw("L SAME"); // L: Line
 
-    c4->SaveAs("lesson04.png");
+    c4->SaveAs("plots/lesson04.png");
 }

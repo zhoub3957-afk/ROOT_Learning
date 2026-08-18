@@ -10,7 +10,7 @@ using namespace std;
 
 void lesson12_analysisPID()
 {
-    TFile *file = new TFile("PID_simulation.root");
+    TFile *file = new TFile("data/PID_simulation.root");
 
     TTree *tree = (TTree*)file->Get("ParticleTree");
 
@@ -66,7 +66,7 @@ void lesson12_analysisPID()
 
     legend->Draw();
 
-    c12->SaveAs("lesson12_PID.png");
+    c12->SaveAs("plots/lesson12_PID.png");
 
     // 创建归一化谱
     TH1F *hpt_pi_norm = (TH1F*)hpt_pi->Clone("hpt_pi_norm");
@@ -96,7 +96,7 @@ void lesson12_analysisPID()
     legend_norm->AddEntry(hpt_p_norm, "p", "l");
     legend_norm->Draw();
 
-    c12_norm->SaveAs("lesson12_PID_normalized.png");
+    c12_norm->SaveAs("plots/lesson12_PID_normalized.png");
 
     // 创建 pi/K ratio
     TH1F *hpt_piK_ratio = (TH1F*)hpt_pi->Clone("hpt_piK_ratio");
@@ -109,7 +109,7 @@ void lesson12_analysisPID()
 
     hpt_piK_ratio->Draw();
 
-    c12_piK_ratio->SaveAs("lesson12_PID_piK_ratio.png");
+    c12_piK_ratio->SaveAs("plots/lesson12_PID_piK_ratio.png");
 
     // 创建 pi/K ratio_normalized
     TH1F *hpt_piK_ratio_norm = (TH1F*)hpt_pi_norm->Clone("hpt_piK_ratio_norm");
@@ -122,7 +122,7 @@ void lesson12_analysisPID()
 
     hpt_piK_ratio_norm->Draw();
 
-    c12_piK_ratio_norm->SaveAs("lesson12_PID_piK_ratio_normalized.png");
+    c12_piK_ratio_norm->SaveAs("plots/lesson12_PID_piK_ratio_normalized.png");
 
     cout << "Pion Entries = " << hpt_pi->GetEntries() << endl;
     cout << "Kaon Entries = " << hpt_K->GetEntries() << endl;

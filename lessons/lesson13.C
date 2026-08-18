@@ -19,7 +19,7 @@ void lesson13()
     TCanvas *c = new TCanvas("c", "Weighted Histogram");
     h->Draw();
 
-    c->SaveAs("lesson13.png");
+    c->SaveAs("plots/lesson13.png");
 
     
 }

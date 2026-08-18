@@ -25,6 +25,6 @@ void lesson14()
 
     TCanvas *c = new TCanvas("c", "Scale and Error");
     h->Draw();
-    c->SaveAs("lesson14.png");
+    c->SaveAs("plots/lesson14.png");
 
 }

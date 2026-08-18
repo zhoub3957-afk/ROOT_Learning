@@ -17,5 +17,5 @@ void lesson06()
     // 绘制函数
     f1->Draw();
 
-    c6->SaveAs("lesson06.png");
+    c6->SaveAs("plots/lesson06.png");
 }
