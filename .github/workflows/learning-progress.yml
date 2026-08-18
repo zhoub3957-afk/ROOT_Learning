@@ -1,0 +1,53 @@
+name: Update learning progress
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/lesson*.C'
+      - 'LEARNING_PROGRESS.md'
+      - '.github/workflows/learning-progress.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-progress:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate progress report
+        shell: bash
+        run: |
+          mapfile -t lessons < <(find . -type f -name 'lesson*.C' -not -path './.git/*' | sort -V)
+          total=${#lessons[@]}
+          completed=$total
+          percent=0
+          if [ "$total" -gt 0 ]; then
+            percent=$((completed * 100 / total))
+          fi
+
+          {
+            echo '# ROOT Learning Progress'
+            echo
+            echo "Automatically updated from the lesson source files in this repository."
+            echo
+            echo "- Lessons found: **$total**"
+            echo "- Progress: **$percent%**"
+            echo
+            echo '## Lessons'
+            echo
+            for file in "${lessons[@]}"; do
+              echo "- [x] \\`$file\\`"
+            done
+          } > LEARNING_PROGRESS.md
+
+      - name: Commit progress report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add LEARNING_PROGRESS.md
+          git diff --cached --quiet || git commit -m 'Update ROOT learning progress'
+          git push
