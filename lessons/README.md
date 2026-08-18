@@ -9,4 +9,4 @@ Each lesson should ideally contain:
 - input/data assumptions when applicable
 - the expected output
 
-As the repository grows, lesson-specific notes can be added here or beside the corresponding source file.
+The lesson numbering is intentionally preserved as a learning history. Larger research topics can later be split into dedicated analysis directories without losing that history.
