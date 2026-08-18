@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths:
       - '**/lesson*.C'
-      - 'LEARNING_PROGRESS.md'
       - '.github/workflows/learning-progress.yml'
 
 permissions:
@@ -23,19 +22,18 @@ jobs:
         run: |
           mapfile -t lessons < <(find . -type f -name 'lesson*.C' -not -path './.git/*' | sort -V)
           total=${#lessons[@]}
-          completed=$total
           percent=0
           if [ "$total" -gt 0 ]; then
-            percent=$((completed * 100 / total))
+            percent=100
           fi
 
           {
             echo '# ROOT Learning Progress'
             echo
-            echo "Automatically updated from the lesson source files in this repository."
+            echo 'This report is generated from the ROOT lesson source files in the repository.'
             echo
             echo "- Lessons found: **$total**"
-            echo "- Progress: **$percent%**"
+            echo "- Recorded lesson coverage: **$percent%**"
             echo
             echo '## Lessons'
             echo
