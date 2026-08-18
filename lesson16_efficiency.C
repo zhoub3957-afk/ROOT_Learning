@@ -1,41 +1,44 @@
-#include<TH1F.h>
-#include<TCanvas.h>
-#include<iostream>
+#include <TCanvas.h>
+#include <TH1F.h>
 
-using namespace std;
+#include <cstdlib>
+#include <iostream>
 
 void lesson16_efficiency()
 {
-    // 未修正的pT谱
-    TH1F *hMeasured = new TH1F("hMeasured", "Measured Efficiency; x; Counts", 50, 0, 5);
+    // 未修正的 pT 谱
+    TH1F *hMeasured = new TH1F(
+        "hMeasured",
+        "Measured and Efficiency-Corrected p_{T} Spectrum; p_{T} (GeV/c); Counts",
+        50, 0, 5
+    );
     hMeasured->Sumw2();
 
-    // 修正后的pT谱
-    TH1F *hCorrected = new TH1F("hCorrected", "Corrected Efficiency; x; Counts", 50, 0, 5);
+    // 效率修正后的 pT 谱
+    TH1F *hCorrected = new TH1F(
+        "hCorrected",
+        "Measured and Efficiency-Corrected p_{T} Spectrum; p_{T} (GeV/c); Counts",
+        50, 0, 5
+    );
     hCorrected->Sumw2();
 
+    for (int i = 0; i < 10000; ++i) {
+        const double pt = 0.2 + 4.8 * static_cast<double>(std::rand()) / RAND_MAX;
 
-    for(int i = 0; i < 10000; i++)
-    {
-        double pt = 0.2 + 4.8 * (double)rand() / (double)RAND_MAX;
-
-        // 假设效率假设效率随pT增加
-        double efficiency = 0.4 + 0.1 * pt; // 简单的线性效率模型
-
-        // 防止效率超过1
-        if(efficiency > 1.0) 
+        // 教学示例：假设探测效率随 pT 线性增加
+        double efficiency = 0.4 + 0.1 * pt;
+        if (efficiency > 1.0)
             efficiency = 1.0;
 
-        // 未修正
+        // 未修正谱
         hMeasured->Fill(pt);
 
-        // 效率修正
-        double weight = 1.0 / efficiency;
+        // 效率修正：每个观测事件按 1/efficiency 加权
+        const double weight = 1.0 / efficiency;
         hCorrected->Fill(pt, weight);
     }
 
-       // 绘图
-    TCanvas *c16 = new TCanvas("c16", "Efficiency Correction"); 
+    TCanvas *c16 = new TCanvas("c16", "Efficiency Correction", 800, 600);
     hMeasured->SetLineColor(kBlue);
     hCorrected->SetLineColor(kRed);
 
