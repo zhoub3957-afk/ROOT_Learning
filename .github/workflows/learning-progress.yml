@@ -20,7 +20,7 @@ jobs:
       - name: Generate progress report
         shell: bash
         run: |
-          mapfile -t lessons < <(find . -type f -name 'lesson*.C' -not -path './.git/*' | sort -V)
+          mapfile -t lessons < <(find ./lessons -type f -name 'lesson*.C' | sort -V)
           total=${#lessons[@]}
           percent=0
           if [ "$total" -gt 0 ]; then
@@ -38,7 +38,8 @@ jobs:
             echo '## Lessons'
             echo
             for file in "${lessons[@]}"; do
-              echo "- [x] \\`$file\\`"
+              filename="${file#./lessons/}"
+              echo "- [x] **${filename}** — [source](lessons/${filename})"
             done
           } > LEARNING_PROGRESS.md
 
