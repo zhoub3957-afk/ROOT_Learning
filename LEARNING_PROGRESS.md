@@ -2,7 +2,7 @@
 
 This report is generated from the ROOT lesson source files in the repository.
 
-- Lessons found: **21**
+- Lessons found: **22**
 - Recorded lesson coverage: **100%**
 
 ## Lessons
@@ -28,3 +28,4 @@ This report is generated from the ROOT lesson source files in the repository.
 - [x] **lesson15.C** — [source](lessons/lesson15.C)
 - [x] **lesson16_efficiency.C** — [source](lessons/lesson16_efficiency.C)
 - [x] **lesson17_TGraphErrors.C** — [source](lessons/lesson17_TGraphErrors.C)
+- [x] **lesson18_hist_to_graph.C** — [source](lessons/lesson18_hist_to_graph.C)
