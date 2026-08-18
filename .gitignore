@@ -1,2 +1,17 @@
+# ROOT data files
 *.root
+*.root.*
+
+# ROOT / C++ build artifacts
+*.o
+*.so
+*.d
+*.pcm
+
+# macOS
 .DS_Store
+
+# Editor temporary files
+*.swp
+*.swo
+*~
