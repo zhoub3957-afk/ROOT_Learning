@@ -1,37 +1,24 @@
-#include <iostream>
-
-#include "TH1F.h"
-#include "TCanvas.h"
-#include "TGraphErrors.h"
+#include<TH1F.h>
+#include<TCanvas.h>
+#include<TGraphErrors.h>
+#include<iostream>
+#include<cmath>
 
 using namespace std;
 
 void lesson18_hist_to_graph()
 {
-    // 1. Create histogram
-    TH1F *h = new TH1F(
-        "h",
-        "Particle Yield;p_{T} (GeV/c);Counts",
-        10,
-        0,
-        5
-    );
+    // 创建一个直方图
+    TH1F *h = new TH1F("h", "Particle Yield;p_{T} (GeV/c);Counts", 10, 0, 5);
 
-    // 2. Set bin contents
-    h->SetBinContent(2, 100);
-    h->SetBinContent(3, 64);
-    h->SetBinContent(4, 49);
-    h->SetBinContent(5, 36);
-    h->SetBinContent(6, 25);
+    // 填充直方图数据
+    h->Fill(0.5, 100);
+    h->Fill(1.0, 64);
+    h->Fill(1.5, 49);
+    h->Fill(2.0, 36);
+    h->Fill(2.5, 25);
 
-    // 3. Set statistical errors
-    h->SetBinError(2, 10);
-    h->SetBinError(3, 8);
-    h->SetBinError(4, 7);
-    h->SetBinError(5, 6);
-    h->SetBinError(6, 5);
-
-    // 4. Number of data points
+    // 3. Create arrays for TGraphErrors
     const int n = 5;
 
     double x[n];
@@ -39,10 +26,10 @@ void lesson18_hist_to_graph()
     double ex[n];
     double ey[n];
 
-    // 5. Read data from histogram
+    // 4. Read data from histogram
     for (int i = 0; i < n; i++)
     {
-        int bin = i + 2;
+        int bin = h->FindBin(0.5 + i * 0.5);
 
         x[i] = h->GetBinCenter(bin);
         y[i] = h->GetBinContent(bin);
@@ -51,38 +38,22 @@ void lesson18_hist_to_graph()
         ey[i] = h->GetBinError(bin);
     }
 
-    // 6. Print values
+    // 5. Print values
     for (int i = 0; i < n; i++)
     {
-        cout << "Point " << i + 1
-             << ": x = " << x[i]
-             << ", y = " << y[i]
-             << " +/- " << ey[i]
-             << endl;
+        cout << "Point " << i + 1 << ": x = " << x[i] << ", y = " << y[i] << " +/- " << ey[i] << endl;
     }
 
-    // 7. Create TGraphErrors
-    TGraphErrors *graph =
-        new TGraphErrors(n, x, y, ex, ey);
+    // 6. Create TGraphErrors
+    TGraphErrors *graph = new TGraphErrors(n, x, y, ex, ey);
 
-    graph->SetTitle(
-        "Particle Yield;p_{T} (GeV/c);Counts"
-    );
-
+    graph->SetTitle("Particle Yield;p_{T} (GeV/c);Counts");
     graph->SetMarkerStyle(20);
 
-    // 8. Draw
-    TCanvas *c = new TCanvas(
-        "c18",
-        "Histogram to TGraphErrors",
-        800,
-        600
-    );
-
+    // 7. Draw
+    TCanvas *c18 = new TCanvas("c18", "Histogram to TGraphErrors", 800, 600);
     graph->Draw("AP");
 
-    // 9. Save
-    c->SaveAs(
-        "plots/lesson18_hist_to_graph.png"
-    );
+    // 8. Save
+    c18->SaveAs("plots/lesson18_hist_to_graph.png");
 }
