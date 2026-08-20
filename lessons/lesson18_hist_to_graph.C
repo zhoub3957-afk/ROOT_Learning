@@ -10,13 +10,33 @@ void lesson18_hist_to_graph()
 {
     // 创建一个直方图
     TH1F *h = new TH1F("h", "Particle Yield;p_{T} (GeV/c);Counts", 10, 0, 5);
+    h->Sumw2();
 
     // 填充直方图数据
-    h->Fill(0.5, 100);
-    h->Fill(1.0, 64);
-    h->Fill(1.5, 49);
-    h->Fill(2.0, 36);
-    h->Fill(2.5, 25);
+    for (int i = 0; i < 100; i++)
+    {
+        h->Fill(0.5);
+    }
+
+    for (int i = 0; i < 64; i++)
+    {
+        h->Fill(1.0);
+    }
+
+    for (int i = 0; i < 49; i++)
+    {
+        h->Fill(1.5);
+    }
+
+    for (int i = 0; i < 36; i++)
+    {
+        h->Fill(2.0);
+    }
+
+    for (int i = 0; i < 25; i++)
+    {
+        h->Fill(2.5);
+    }
 
     // 3. Create arrays for TGraphErrors
     const int n = 5;
@@ -41,8 +61,7 @@ void lesson18_hist_to_graph()
     // 5. Print values
     for (int i = 0; i < n; i++)
     {
-        
-        cout << "Point " << i + 1 << ": x = " << x[i] << ", y = " << y[i] << " +/- " << ey[i] << endl;
+        cout << "Point " << i + 1 << ": x = " << x[i] << " +/-"<< ex[i] << ", y = " << y[i] << " +/- " << ey[i] << endl;
     }
 
     // 6. Create TGraphErrors
