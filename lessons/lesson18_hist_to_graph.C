@@ -41,6 +41,7 @@ void lesson18_hist_to_graph()
     // 5. Print values
     for (int i = 0; i < n; i++)
     {
+        
         cout << "Point " << i + 1 << ": x = " << x[i] << ", y = " << y[i] << " +/- " << ey[i] << endl;
     }
 
