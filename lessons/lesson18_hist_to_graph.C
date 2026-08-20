@@ -61,7 +61,7 @@ void lesson18_hist_to_graph()
     // 5. Print values
     for (int i = 0; i < n; i++)
     {
-        cout << "Point " << i + 1 << ": x = " << x[i] << " +/-"<< ex[i] << ", y = " << y[i] << " +/- " << ey[i] << endl;
+        cout << "Point " << i + 1 << ": x = " << x[i] << " +/-" << ex[i] << ", y = " << y[i] << " +/- " << ey[i] << endl;
     }
 
     // 6. Create TGraphErrors
