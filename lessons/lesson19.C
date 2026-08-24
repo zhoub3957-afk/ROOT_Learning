@@ -12,7 +12,7 @@ void lesson19()
     double x[n] = {0, 1, 2, 3, 4};
     double y[n] = {1.1, 2.9, 5.2, 6.8, 9.1};
     double ex[n] = {0, 0, 0, 0, 0};
-    double ey[n] = {0.1, 0.2, 0.3, 0.2, 0.5};
+    double ey[n] = {1, 1, 1, 1, 1};
 
     TGraphErrors *graph = new TGraphErrors(n, x, y, ex, ey);
     graph->SetTitle("Linear Fit with Experimental Errors;" "x;" "y;");
