@@ -22,8 +22,31 @@ void lesson19()
     fit->SetParameters(0, 2);
     fit->SetParameters(1, 1);
 
+
     TCanvas *c19 = new TCanvas("c19", "TGraphErrors Linear Fit", 800, 600);
     graph->Draw("AP");
     graph->Fit(fit, "R");
+
+    double slope = fit->GetParameter(0);
+    double slope_error = fit->GetParError(0);
+
+    double intercept = fit->GetParameter(1);
+    double intercept_error = fit->GetParError(1);
+    
+    // Get fit quality
+    double chi2 = fit->GetChisquare();
+    double ndf = fit->GetNDF();
+
+    double chi2ndf = chi2 / ndf;
+
+    // Print results
+    cout << endl;
+    cout << "===== Fit Results =====" << endl;
+    cout << "Slope = " << slope << " +/- " << slope_error << endl;
+    cout << "Intercept = " << intercept << " +/- " << intercept_error << endl;
+    cout << "Chi2 = " << chi2 << endl;
+    cout << "NDF = " << ndf << endl;
+    cout << "Chi2/NDF = "<< chi2ndf << endl;
+
     c19->SaveAs("plots/lesson19_linear_fit.png");
 }
