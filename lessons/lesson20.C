@@ -18,14 +18,14 @@ void lesson20()
     graph->SetTitle("Simulated Particle p_{T} Spectrum;" "p_{T} (GeV/c);" "dN/dp_{T} ");
     graph->SetMarkerStyle(20);
     
-    TF1 *fit = new TF1("fit", "[0]*exp(-x/[1])", 0.2, 2.5);
+    TF1 *fit = new TF1("fit", "[0] + [1]*x", 0.2, 2.5);
     fit->SetParameters(1000, 0.5);
     graph->Fit(fit, "R");
 
     TCanvas *c20 = new TCanvas("c20", "Simulated Particle pT Spectrum", 800, 600);
     graph->Draw("AP");
 
-    double A = fit->GetParameter(0);
+    double intercept = fit->GetParameter(0);
     double A_error = fit->GetParError(0);
 
     double T = fit->GetParameter(1);
