@@ -21,9 +21,7 @@ void lesson20()
     // ==========================================
 
     TGraphErrors *graph = new TGraphErrors(n, pT, yield, nullptr, ey);
-
     graph->SetTitle("Simulated Particle p_{T} Spectrum;" "p_{T} (GeV/c);" "dN/dp_{T}");
-
     graph->SetMarkerStyle(20);
 
     // ==========================================
@@ -35,7 +33,6 @@ void lesson20()
     // ==========================================
 
     TF1 *fit = new TF1("fit", "[0]*exp(-x/[1])", 0.2, 2.0);
-
     fit->SetParameters(1000, 0.8);
 
     // ==========================================
@@ -43,7 +40,6 @@ void lesson20()
     // ==========================================
 
     TCanvas *c20 = new TCanvas("c20", "Simulated Particle pT Spectrum", 800, 600);
-
     graph->Draw("AP");
 
     // ==========================================
@@ -70,7 +66,7 @@ void lesson20()
     // ==========================================
 
     cout << endl;
-    
+
     cout << "===== Exponential pT Fit Results =====" << endl;
     cout << "A = " << A << " +/- " << AError << endl;
     cout << "T = " << T << " +/- " << TError << " GeV/c" << endl;
