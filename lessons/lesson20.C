@@ -12,34 +12,17 @@ void lesson20()
     // ==========================================
 
     const int n = 8;
-
-    double pT[n] = {
-        0.25, 0.50, 0.75, 1.00,
-        1.25, 1.50, 1.75, 2.00
-    };
-
-    double yield[n] = {
-        780, 590, 450, 340,
-        260, 195, 150, 112
-    };
-
-    double ey[n] = {
-        28, 25, 22, 19,
-        16, 14, 12, 10
-    };
+    double pT[n] = {0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75, 2.00};
+    double yield[n] = {780, 590, 450, 340, 260, 195, 150, 112};
+    double ey[n] = {28, 25, 22, 19, 16, 14, 12, 10};
 
     // ==========================================
     // 2. Create TGraphErrors
     // ==========================================
 
-    TGraphErrors *graph =
-        new TGraphErrors(n, pT, yield, nullptr, ey);
+    TGraphErrors *graph = new TGraphErrors(n, pT, yield, nullptr, ey);
 
-    graph->SetTitle(
-        "Simulated Particle p_{T} Spectrum;"
-        "p_{T} (GeV/c);"
-        "dN/dp_{T}"
-    );
+    graph->SetTitle("Simulated Particle p_{T} Spectrum;" "p_{T} (GeV/c);" "dN/dp_{T}");
 
     graph->SetMarkerStyle(20);
 
@@ -51,13 +34,7 @@ void lesson20()
     // [1] = T
     // ==========================================
 
-    TF1 *fit =
-        new TF1(
-            "fit",
-            "[0]*exp(-x/[1])",
-            0.2,
-            2.0
-        );
+    TF1 *fit = new TF1("fit", "[0]*exp(-x/[1])", 0.2, 2.0);
 
     fit->SetParameters(1000, 0.8);
 
@@ -65,13 +42,7 @@ void lesson20()
     // 4. Create canvas and draw data
     // ==========================================
 
-    TCanvas *c20 =
-        new TCanvas(
-            "c20",
-            "Simulated Particle pT Spectrum",
-            800,
-            600
-        );
+    TCanvas *c20 = new TCanvas("c20", "Simulated Particle pT Spectrum", 800, 600);
 
     graph->Draw("AP");
 
@@ -101,23 +72,15 @@ void lesson20()
     cout << endl;
     cout << "===== Exponential pT Fit Results =====" << endl;
 
-    cout << "A = "
-         << A << " +/- "
-         << AError << endl;
+    cout << "A = " << A << " +/- " << AError << endl;
 
-    cout << "T = "
-         << T << " +/- "
-         << TError
-         << " GeV/c" << endl;
+    cout << "T = " << T << " +/- " << TError << " GeV/c" << endl;
 
-    cout << "Chi2 = "
-         << chi2 << endl;
+    cout << "Chi2 = " << chi2 << endl;
 
-    cout << "NDF = "
-         << ndf << endl;
+    cout << "NDF = " << ndf << endl;
 
-    cout << "Chi2/NDF = "
-         << chi2 / ndf << endl;
+    cout << "Chi2/NDF = " << chi2 / ndf << endl;
 
     // ==========================================
     // 8. Save plot
