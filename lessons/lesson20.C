@@ -70,16 +70,12 @@ void lesson20()
     // ==========================================
 
     cout << endl;
+    
     cout << "===== Exponential pT Fit Results =====" << endl;
-
     cout << "A = " << A << " +/- " << AError << endl;
-
     cout << "T = " << T << " +/- " << TError << " GeV/c" << endl;
-
     cout << "Chi2 = " << chi2 << endl;
-
     cout << "NDF = " << ndf << endl;
-
     cout << "Chi2/NDF = " << chi2 / ndf << endl;
 
     // ==========================================
