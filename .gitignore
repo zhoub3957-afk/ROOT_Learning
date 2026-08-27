@@ -8,6 +8,9 @@
 *.d
 *.pcm
 
+# VSCode settings
+.vscode/
+
 # macOS
 .DS_Store
 
