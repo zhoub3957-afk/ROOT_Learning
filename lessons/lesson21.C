@@ -26,9 +26,19 @@ void lesson21()
     double totalCounts = h->Integral();
     cout << "Total counts = " << totalCounts << endl;
 
+    // convert counts to dN/dT
+    TH1F *hSpectrum = (TH1F*)h->Clone("hSpectrum");
+    hSpectrum->SetTitle("Particle p_{T} Spectrum; p_{T} (GeV/c); dN/dp_{T}");
+    hSpectrum->Scale(1.0 / binWidth); // Scale by 1/binWidth to get dN/dpT
+
     // Draw the histogram
     TCanvas *c21 = new TCanvas("c21", "Lesson 21", 800, 600);
     h->Draw("E"); // Draw with error bars
     c21->SaveAs("plots/lesson21.png");
+
+    // Draw the dN/dpT spectrum
+    TCanvas *cSpectrum = new TCanvas("c21_Spectrum", "pT Spectrum", 800, 600);
+    hSpectrum->Draw("E");
+    cSpectrum->SaveAs("plots/lesson21_spectrum.png");
 }
     
