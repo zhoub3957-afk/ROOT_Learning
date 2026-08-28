@@ -40,5 +40,6 @@ void lesson21()
     TCanvas *cSpectrum = new TCanvas("c21_Spectrum", "pT Spectrum", 800, 600);
     hSpectrum->Draw("E");
     cSpectrum->SaveAs("plots/lesson21_spectrum.png");
+    
 }
     
